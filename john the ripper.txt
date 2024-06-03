@@ -1,0 +1,129 @@
+--help Imprimir resumen de uso
+--single[=SECTION[,..]] Modo "Single crack", usando reglas predeterminadas o con nombre
+--single=:regla[,..] Lo mismo, usando reglas "inmediatas"
+--single-seed=WORD[,WORD] Agregue palabras semilla estáticas para todas las sales en modo único
+--single-wordlist=ARCHIVO *Lista de palabras corta* con palabras iniciales/morfemas estáticos
+--single-user-seed=ARCHIVO Lista de palabras con semillas por nombre de usuario (usuario:contraseña[s]formato)
+--single-pair-max=N Anular máx. número de pares de palabras generados (6)
+--no-single-pair Deshabilitar la generación de pares de palabras únicas
+--[no-]single-retest-guess Anular configuración para SingleRetestGuess
+--wordlist[=FILE] --stdin Modo de lista de palabras, lee palabras desde ARCHIVO o stdin
+                   --pipe como --stdin, pero lecturas masivas y permite reglas
+--rules[=SECCIÓN[,..]] Habilitar reglas de manipulación de palabras (para lista de palabras o PRINCE
+                            modos), usando reglas predeterminadas o con nombre
+--rules=:regla[;..]] Lo mismo, usando reglas "inmediatas"
+--rules-stack=SECCIÓN[,..] Reglas apiladas, aplicadas después de reglas regulares o para
+                            modos que de otro modo no soportarían reglas
+--rules-stack=:regla[;..] Lo mismo, usando reglas "inmediatas"
+--rules-skip-nop Omite cualquier regla NOP ":" (ya ejecutaste sin reglas)
+--loopback[=FILE] Como --wordlist, pero extrae palabras de un archivo .pot
+--mem-file-size=SIZE Umbral de tamaño para la precarga de la lista de palabras (predeterminado 2048 MB)
+--dupe-suppression Suprime todos los duplicados en la lista de palabras (y fuerza la precarga)
+--incremental[=MODE] Modo "incremental" [usando la sección MODE]
+--incremental-charcount=N Anular CharCount para modo incremental
+--external=MODE Modo externo o filtro de palabras
+--mask[=MASK] Modo de máscara usando MASK (o el valor predeterminado de john.conf)
+--markov[=OPCIONES] Modo "Markov" (ver doc/MARKOV)
+--mkv-stats=ARCHIVO Archivo de estadísticas "Markov"
+--prince[=ARCHIVO] Modo PRINCE, lee palabras del ARCHIVO
+--prince-loopback[=FILE] Recupera palabras de un archivo .pot
+--prince-elem-cnt-min=N Número mínimo de elementos por cadena (1)
+--prince-elem-cnt-max=[-]N Número máximo de elementos por cadena (N negativo es
+                            relativo a la longitud de la palabra) (8)
+--prince-skip=N Salto inicial
+--prince-limit=N Limitar el número de candidatos generados
+--prince-wl-dist-len Calcular la distribución de longitud a partir de la lista de palabras
+--prince-wl-max=N Cargar solo N palabras de la lista de palabras de entrada
+--prince-case-permute Permutar caso de la primera letra
+--prince-mmap Archivo de mapa de memoria (no disponible con permutación de mayúsculas y minúsculas)
+--prince-keyspace Solo muestra el espacio de claves total que se produciría
+                            (sin tener en cuenta saltar y limitar)
+--subsets[=CHARSET] Modo "Subconjuntos" (ver doc/SUBSETS)
+--subsets-required=N Los N primeros caracteres del juego de caracteres "subconjuntos" son
+                            el "conjunto requerido"
+--subsets-min-diff=N Mínimo de caracteres únicos en el subconjunto
+--subsets-max-diff=[-]N Máximo de caracteres únicos en el subconjunto (N negativo es
+                            relativo a la longitud de la palabra)
+--subsets-prefer-short Prefiere candidatos más cortos a subconjuntos más pequeños
+--subsets-prefer-small Prefiere subconjuntos más pequeños a candidatos más cortos
+--make-charset=FILE Crea un juego de caracteres, el ARCHIVO se sobrescribirá
+--stdout[=LONGITUD] Simplemente genera las contraseñas candidatas [cortadas en LONGITUD]
+--session=NOMBRE Dale a una nueva sesión el NOMBRE
+--status[=NOMBRE] Imprimir el estado de una sesión [llamada NOMBRE]
+--restore[=NOMBRE] Restaura una sesión interrumpida [llamada NOMBRE]
+--[no-]crack-status Emite una línea de estado cada vez que se descifra una contraseña
+--progress-every=N Emite una línea de estado cada N segundos
+--show[=izquierda] Mostrar contraseñas descifradas [si =izquierda, luego no descifrada]
+--show=formatos Muestra información sobre hashes en un archivo (JSON)
+--show=invalid Mostrar líneas que no son válidas para los formatos seleccionados
+--test[=TIME] Ejecute pruebas y puntos de referencia durante TIME segundos cada uno
+                            (si TIME es explícitamente 0, prueba sin punto de referencia)
+--stress-test[=TIME] Autopruebas en bucle para siempre
+--test-full=NIVEL Ejecute autopruebas más exhaustivas
+--no-mask Usado con --test para un punto de referencia alternativo sin máscara
+--skip-self-tests Omitir autopruebas
+--users=[-]LOGIN|UID[,..] [No] cargar este(s) usuario(s) únicamente
+--groups=[-]GID[,..] Cargar usuarios [no] de este (estos) grupo(s) únicamente
+--shells=[-]SHELL[,..] Cargar usuarios sin[fuera] este(s) shell(s) únicamente
+--salts=[-]COUNT[:MAX] Cargar sales con[out] COUNT [hasta MAX] hashes, o
+--salts=#M[-N] Cargar M [a N] sales más pobladas
+--costs=[-]C[:M][,...] Cargar sales con[fuera] valor de costo Cn [a Mn]. Para
+                            parámetros de costos ajustables, ver doc/OPCIONES
+--fork=N bifurcación N procesos
+--node=MIN[-MAX]/TOTAL El rango de números de este nodo está fuera del recuento TOTAL
+--save-memory=NIVEL Habilita el ahorro de memoria, en NIVEL 1..3
+--log-stderr Iniciar sesión en la pantalla en lugar de en el archivo
+--verbosity=N Cambiar detalle (1-5 o 6 para depuración, predeterminado 3)
+--no-log Deshabilita la creación y escritura en el archivo john.log
+--bare-always-valid=Y Tratar los hashes desnudos como válidos (S/N)
+--catch-up=NOMBRE Ponerse al día con la sesión existente (en pausa) NOMBRE
+--config=ARCHIVO Utilice ARCHIVO en lugar de john.conf o john.ini
+--encoding=NOMBRE Codificación de entrada (por ejemplo, UTF-8, ISO-8859-1). Ver también
+                            doc/CODIFICACIONES.
+--input-encoding=NOMBRE Codificación de entrada (alias para --encoding)
+--internal-codepage=NOMBRE Página de códigos utilizada en reglas/máscaras (ver doc/ENCODINGS)
+--target-encoding=NOMBRE Codificación de salida (usada por formato)
+--force-tty Configurar terminal para leer pulsaciones de teclas incluso si estamos
+                            no el proceso de primer plano
+--field-separator-char=C Utilice 'C' en lugar de ':' en archivos de entrada y pot
+--[no-]sigue adivinando Intente encontrar colisiones de texto sin formato
+--list=QUÉ Capacidades de lista, consulte --list=ayuda o doc/OPCIONES
+--length=N Atajo para --min-len=N --max-len=N
+--min-length=N Solicitar una longitud candidata mínima en bytes
+--max-length=N Solicitar una longitud máxima del candidato en bytes
+--max-candidates=[-]N Salir con gracia después de que tantos candidatos lo intentaran.
+                            (si es negativo, reinicie el recuento en cada grieta)
+--max-run-time=[-]N Salga con gracia después de tantos segundos (si es negativo,
+                            restablecer el temporizador en cada grieta)
+--mkpc=N Solicitar un máximo inferior. claves por cripta
+--no-loader-dupecheck Deshabilita la verificación de duplicados al cargar hashes
+--pot=NOMBRE Archivo Pot a usar
+--regen-lost-salts=N Fuerza bruta sales desconocidas (ver doc/OPCIONES)
+--reject-printable Rechazar archivos binarios imprimibles
+--tune=CÓMO Opciones de ajuste (automático/informe/N)
+--subformat=FORMAT Elija un formato de referencia para --format=crypt
+--format=[NOMBRE|CLASE][,..] Forzar hash de tipo NOMBRE. Los formatos admitidos pueden
+                            verse con --list=formats y --list=subformats.
+                            Consulte también doc/OPCIONES para una selección más avanzada de
+                            formato(s), incluido el uso de clases y comodines.
+
+
+
+
+
+- **Volatility:** Es una herramienta de análisis de memoria forense. Se utiliza para extraer información valiosa de la memoria del sistema operativo, como
+ procesos en ejecución, conexiones de red y, en tu caso, hashes de contraseñas almacenadas en la memoria. Volatility es especialmente útil cuando se trabaja
+ con volcados de memoria.
+
+  ```bash
+  volatility -f lsass.dmp --profile=Win10x64_18362 hashdump
+  ```
+
+- **John the Ripper:** Es una herramienta de prueba de contraseñas. Se utiliza para realizar ataques de fuerza bruta o diccionario contra hashes de contraseñas.
+ Puedes usar John the Ripper para intentar crackear los hashes obtenidos con Volatility.
+
+  ```bash
+  john --format=NT --wordlist=rockyou.txt hashes.txt
+  ```
+
+  En este ejemplo, `rockyou.txt` es un archivo que contiene contraseñas comunes que se utilizarán en el ataque.

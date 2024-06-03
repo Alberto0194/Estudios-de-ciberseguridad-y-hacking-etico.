@@ -1,0 +1,17 @@
+msf6 > loot -h
+Uso: loot [opciones]
+  Información: Loot [-h] [ADDR1 ADDR2 ...] [-T <Tipo1, Tipo2>]
+   Agregar: Loot -f [fname] -i [info] -a [addr1 addr2 ...] -t [type]
+   Del: loot -d [addr1 addr2...]
+
+
+OPCIONES:
+
+     -a, -Add Agregar loot a la lista de direcciones, en lugar de listado.
+     -d, --delete Elimina *todos* los hosts y tipos que coincidan con el loot.
+     -F, -archivo <filename> con contenido del loot para agregar.
+     -h, --help muestra esta información de ayuda.
+     -i, --info <Info> Información del loot para agregar.
+     -S, --search <filter> Search String para filtrar por.
+     -t, --Type <type1, type2> Buscar una lista de tipos.
+     -u, --update Actualiza el loot. No soportado oficialmente.

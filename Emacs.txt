@@ -1,0 +1,42 @@
+
+### Movimiento en el texto:
+- **C-f**: Moverse hacia adelante (similar a la flecha derecha).
+- **C-b**: Moverse hacia atrás (similar a la flecha izquierda).
+- **C-n**: Moverse hacia abajo (similar a la flecha abajo).
+- **C-p**: Moverse hacia arriba (similar a la flecha arriba).
+- **C-a**: Ir al principio de la línea.
+- **C-e**: Ir al final de la línea.
+- **M-f**: Moverse hacia adelante por palabras.
+- **M-b**: Moverse hacia atrás por palabras.
+
+### Operaciones básicas:
+- **C-x C-f**: Abrir un archivo.
+- **C-x C-s**: Guardar un archivo.
+- **C-x C-w**: Guardar como (escribir en un nuevo archivo).
+- **C-x C-c**: Salir de Emacs.
+
+### Edición de texto:
+- **C-space**: Iniciar selección (marcar texto).
+- **C-w**: Cortar (eliminar texto seleccionado).
+- **M-w**: Copiar (copiar texto seleccionado).
+- **C-y**: Pegar (insertar el texto cortado o copiado).
+- **M-d**: Borrar la palabra siguiente.
+- **C-k**: Borrar desde la posición actual hasta el final de la línea.
+
+### Funciones avanzadas:
+- **M-x**: Ejecutar un comando por nombre.
+- **C-g**: Cancelar el comando actual o salir de una operación.
+
+### Ayuda y Documentación:
+- **C-h t**: Tutorial de Emacs.
+- **C-h k**: Describe la función asignada a un atajo de teclado.
+- **C-h f**: Describe una función específica.
+- **C-h a**: Busca comandos por palabras clave.
+
+Estos son solo algunos de los comandos básicos en Emacs. Hay muchos más comandos y combinaciones de 
+teclas que pueden ser utilizados para realizar diferentes tareas. Puedes explorar la documentación interna de Emacs presionando 
+`Ctrl` + `h` seguido de una letra para acceder a las opciones de ayuda.
+
+alt+x luego de selecionar el campo a editar y escribiendo replace-string, enter el caractar a reemplazar, enter el caracter con el cual lo vas a reemplazar
+
+alt+shift+m luego alt+x luego replace-regexp luego \s-+ y presionamos enter 2 veces para eliminar todos los espacios de un texto

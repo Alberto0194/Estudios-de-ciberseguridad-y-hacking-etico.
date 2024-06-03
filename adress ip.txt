@@ -1,0 +1,20 @@
+ubuntumetasploit 10.0.2.15 en solo host 192.168.56.104
+kali	192.168.56.109
+servermetasploit	10.0.0.32 en solo host 192.168.56.105
+ubuntu 192.168.56.108
+
+protonvpn juanslam6@hotmail.com
+!8B[!OYyU1Tj6PUG
+Awlk9MXrpbzh2Zrz usuario
+lMsLaaS6HkAQuF0bucsLHmnK7ZDqPTND contrasena
+
+
+cuenta: user:juan slam correo windows live juanslam6@hotmail.com 
+brainpool42 270195
+
+udemy 104.18.106.64
+
+solo tendra acceso a internet utilizando nat las demas para pruebas
+de penetracion no tendran acceso a esta ultima
+
+desconectar y conectar cable a la hora de cambiar de nat a host o viceversa

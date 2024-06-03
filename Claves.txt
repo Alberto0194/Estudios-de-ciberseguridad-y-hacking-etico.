@@ -1,0 +1,6 @@
+windows 10 > 1410
+windows servers2016 > Kaliservers2016
+ubuntu > vagrant
+kali > kali
+metasploit 2 maquinas > vagrant
+windows 7 > Kali1410 

