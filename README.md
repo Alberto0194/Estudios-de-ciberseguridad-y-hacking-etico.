@@ -1,7 +1,7 @@
 # Estudios-de-ciberseguridad-y-hacking-tico.
 Estudios desde lo básico hasta lo avanzado dentro del mundo de la ciberseguridad.
 
-Recordar siempre antes de comenzar cualquier trabajo de hackin etico que todo lo se vaya a realizar sea mediante un contrato y firmado por el cliente como representante del proyecto
+Recordar siempre antes de comenzar cualquier trabajo de hacking etico que todo lo se vaya a realizar sea mediante un contrato y firmado por el cliente como representante del proyecto
 Leer bien las politicas de la empresa para no contradecir los procedimientos
 
 sudo dpkg-reconfigure locales - para cambiar idioma de interfaz
