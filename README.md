@@ -30,21 +30,12 @@ metashield analyzer mas igual que foca que metagoofil pero en la web
 cve - pagina o mas bien base de datos donde las vurnerabilidades encontradas en diferentes empresas son publicada y se le asiga un numero que mayormente se reconocen de esa forma
 para identificar si nuestro producto a raiz de nuestro analisis tiene vurnerabilidad esta pagina quizas lo tenga ademas tiene la opcion de indicarnos a traves
 del codio de la vurnerabilidad que se le asigna el nivel de vurnerabilidad y todos los que tiene
-protonvpn juanslam6@hotmail.com
-!8B[!OYyU1Tj6PUG
-Awlk9MXrpbzh2Zrz usuario
-lMsLaaS6HkAQuF0bucsLHmnK7ZDqPTND contrasena
 
-Maltego juanslam6@hotmail.com
-poolWalker42
+
+
 transformadores son las herramientas como maltego, que son consultas que pasa la informacion en datos, se ejecutan en dferentes base de datos y entidades
 
-Censys
-Poolbrain42
 
-Nessus
-JuanSlams
-brainpool42
 
 archive.org - se realiza busqueda de paginas desde sus inicios hasta la actualidad y podemos ver como era antes y la informacion de aquel entonces
 
@@ -121,7 +112,7 @@ para abrir los plugins que son herramientas para trabajar con las vulnerabilidad
 para buscar en internet una vurnerabilidad y trabajarla podemos tomar una parte del el por ejemplo en tcp aparece un puerto abierto con el error llamado mir por ejemplo 
 en el navegador para un plugin creado en github seria mir exploit python
 
-netcar en terminal nc funciona para realizar conectividad entre maquinas a traves de puertos por ejemplo nc -l -p 4444
+netcat en terminal nc funciona para realizar conectividad entre maquinas a traves de puertos por ejemplo nc -l -p 4444
 y otro terminal nc localhost 4444 , todo lo que escriba aparecera en el primer terminal igualmente, al igual que si abrimos wireshark 
 veremos desde el punto de host principal hasta donde se envia mas todas las informaciones indicandonos el host 4444 mas los mensajes
 si entramos a loopback en wireshark
