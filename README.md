@@ -24,7 +24,7 @@ country: pais donde se buscara
 port: puerto que deseamos
 org:"para anadir empresa o institucion que deseemos buscar"
 https://github.com/jakejarvis/awesome-shodan-queries#webcams para webcams
-API Key: cbBwr9m1SlkHtjij9b9ut7dNRq0nukH8
+API Key: su api
 metagoofil -h para metadatos
 metashield analyzer mas igual que foca que metagoofil pero en la web
 cve - pagina o mas bien base de datos donde las vurnerabilidades encontradas en diferentes empresas son publicada y se le asiga un numero que mayormente se reconocen de esa forma
